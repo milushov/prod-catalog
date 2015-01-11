@@ -38,3 +38,23 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'guard-rspec', require: false
+  gem 'database_cleaner'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  gem 'pry-rails'
+end
+
+gem 'slim-rails'
+gem 'twitter-bootstrap-rails'
+gem 'puma'
+
+group :production do
+  gem 'rails_12factor'
+end
+
+
