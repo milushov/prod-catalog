@@ -15,7 +15,10 @@ p#notice = notice
 
   = render 'reviews/new_review'
 
-  h2 Reviews
+  - if @reviews.any?
+    h2 Reviews
 
-  - @reviews.each do |review|
-    = render review
+    - @reviews.each do |review|
+      = render review
+  - else
+    h2 No reviews, leave the first review

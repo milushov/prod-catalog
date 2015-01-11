@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
+  layout 'admin'
+
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_reviewable
 
@@ -26,6 +28,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.user = current_user
+
     if @review.save
       flash[:notice] = 'You have successfully create review!'
     else
@@ -37,13 +40,25 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review.update(review_params)
-    respond_with(@review)
+    if @review.update(review_params)
+      flash[:notice] = 'You have successfully update review!'
+    else
+      errors_msgs = @review.errors.full_messages.join(';')
+      flash[:alert] = "Your review has errors: #{errors_msgs}"
+    end
+
+    redirect_to(category_product_path(@review.product.category_id, @review.product))
   end
 
   def destroy
-    @review.destroy
-    respond_with(@review)
+    if @review.destroy
+      flash[:notice] = 'You have successfully update review!'
+    else
+      errors_msgs = @review.errors.full_messages.join(';')
+      flash[:alert] = "Your review has errors: #{errors_msgs}"
+    end
+
+    redirect_to(category_product_path(@review.product.category_id, @review.product))
   end
 
   private

@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :category
-  has_many :reviews, -> { order('reviews.updated_at desc') }
+  has_many :reviews, -> { order('reviews.updated_at desc') }, dependent: :destroy
 
   default_scope -> { order('products.updated_at desc') }
 

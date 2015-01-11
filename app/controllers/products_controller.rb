@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
     @product.update(product_params)
     if @product.save
       flash[:notice] = 'You have successfully update product!'
-      redirect_to category_products_path(@product.category)
+      redirect_to category_product_path(@product.category, @product)
     else
       respond_with(@product)
     end
@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :description, :category_id)
+    params.require(:product).permit(:title, :description, :category_id, :image)
   end
 
   def resolve_layout
