@@ -52,6 +52,7 @@ end
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
+gem 'devise-bootstrap-views'
 
 group :production do
   gem 'rails_12factor'

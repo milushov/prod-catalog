@@ -1,6 +1,29 @@
 p#notice = notice
 
+.row.product-card
+  .col-xs-4.col-sm-4
+    .thumbnail
+      = image_tag('http://placehold.it/350x250')
 
-= link_to 'Edit', edit_product_path(@product)
-'|
-= link_to 'Back', products_path
+  .col-xs-6.col-sm-6
+    .row
+      h1 = @product.title
+    .row
+      = @product.description
+
+.row.product-comments
+
+  - if user_signed_in?
+    h2 Leave your feedback fot this product
+    = render 'reviews/form'
+  - else
+    .alert.alert-info.review-login
+      | Before leaving your feedback 
+      = link_to 'login', new_user_session_path
+      |  or 
+      = link_to 'sing up', new_user_registration_path
+
+  h2 Reviews
+
+  - @reviews.each do |review|
+    = render review

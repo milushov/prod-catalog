@@ -13,19 +13,12 @@ html
     = render 'shared/navigation'
 
     .container.app
-      - if flash[:notice].present?
-        .alert.alert-success
-          = flash[:notice]
-
-      - if flash[:alert].present?
-        .alert.alert-danger
-          = flash[:alert]
-
-
       .row
-        .col-xs-3.col-sm-3
-          = render 'shared/categories_menu'
-        .col-xs-9.col-sm-9
+        - if flash[:notice].present?
+          .alert.alert-success
+            = flash[:notice]
+      .row
+        .col-sm-4.col-sm-offset-4
           = yield
 
     = render 'shared/counter'

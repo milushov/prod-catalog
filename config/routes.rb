@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :products, only: [:index]
+  resources :products, only: [:index] do
+    resources :reviews
+  end
 
   resources :categories do
-    resources :products do
-      resources :reviews
-    end
+    resources :products
   end
 
   devise_for :users

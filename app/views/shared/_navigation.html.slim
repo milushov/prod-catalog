@@ -12,3 +12,16 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       ul.nav.navbar-nav
         li
           a href="#{products_path}" Products
+
+
+      .pull-right
+        - if user_signed_in?
+          span.hello-user
+            = "Hello, #{current_user.email}"
+          | | 
+          = link_to 'Logout', destroy_user_session_path, class: 'btn btn-danger navbar-btn'
+
+        - else
+          = link_to 'Login', new_user_session_path, class: 'btn btn-default navbar-btn'
+          | | 
+          = link_to 'Sing up', new_user_registration_path, class: 'btn btn-success navbar-btn'

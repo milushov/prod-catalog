@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    respond_with(@category)
+    redirect_to category_products_path(params[:id])
   end
 
   def new
@@ -42,6 +42,6 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params[:category]
+      params.require(:category).permit(:name)
     end
 end

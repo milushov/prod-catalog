@@ -1,0 +1,8 @@
+div.list-group
+  = link_to products_path, class: [is_category_active? && 'active', 'list-group-item' ] do
+    | All
+
+  - @categories.each do |category|
+    = link_to category, class: [is_category_active?(category) && 'active', 'list-group-item' ] do
+      = category.name
+      span.badge = category.products.size

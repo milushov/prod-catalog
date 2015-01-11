@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_reviewable
 
   respond_to :html
 
@@ -22,8 +23,15 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @review.save
-    respond_with(@review)
+    @review.user = current_user
+    if @review.save
+      flash[:notice] = 'You have successfully create review!'
+    else
+      errors_msgs = @review.errors.full_messages.join(';')
+      flash[:alert] = "Your review has errors: #{errors_msgs}"
+    end
+
+    redirect_to(request.referer)
   end
 
   def update
@@ -37,11 +45,18 @@ class ReviewsController < ApplicationController
   end
 
   private
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    def review_params
-      params[:review]
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  def set_reviewable
+    if pid = params[:product_id]
+      @product = Product.find(pid)
     end
+  end
+
+  def review_params
+    params.require(:review).permit(:msg, :product_id)
+  end
 end
