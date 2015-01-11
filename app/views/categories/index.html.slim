@@ -2,7 +2,7 @@ h1 Listing categories
 
 - @categories.each do |category|
   .well.well-sm
-    = link_to edit_category_path(category) do
+    = link_to category_path(category) do
       = category.name
     = render 'categories/actions', category: category
 
