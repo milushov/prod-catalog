@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :descripiton, :category_id)
+    params.require(:product).permit(:title, :description, :category_id)
   end
 
   def resolve_layout
