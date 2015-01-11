@@ -5,6 +5,7 @@ speech = <<eos
   It started before I was born. My biological mother was a young, unwed college graduate student, and she decided to put me up for adoption. She felt very strongly that I should be adopted by college graduates, so everything was all set for me to be adopted at birth by a lawyer and his wife. Except that when I popped out they decided at the last minute that they really wanted a girl. So my parents, who were on a waiting list, got a call in the middle of the night asking: "We have an unexpected baby boy; do you want him?" They said: "Of course." My biological mother later found out that my mother had never graduated from college and that my father had never graduated from high school. She refused to sign the final adoption papers. She only relented a few months later when my parents promised that I would someday go to college.
 eos
 
+images = ["http://ecx.images-amazon.com/images/I/41ZEpL%2BU-bL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/5126u6Mwp6L._AA160_.jpg", "http://ecx.images-amazon.com/images/I/51d79o6gz0L._AA160_.jpg", "http://ecx.images-amazon.com/images/I/41Vei2caylL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/41p%2B7m1w9eL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/41cJhU2wxkL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/41mcHN%2BIDLL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/51iqsMnrz7L._AA160_.jpg", "http://ecx.images-amazon.com/images/I/41Y3frrAsVL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/51qNiFC-SrL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/51CwuPNg4BL._AA160_.jpg", "http://ecx.images-amazon.com/images/I/31wjOELyfBL._AA160_.jpg"]
 
 Category.destroy_all
 Product.destroy_all
@@ -26,7 +27,7 @@ user = User.create(is_admin: false, email: 'test@test.ru', password: '12345678')
   (1..rand(7..12)).each do |i|
     text = speech.split(' ').select{ rand(2).even? }.join(' ')
 
-    if product = cat.products.create(title: "product #{i}", description: text)
+    if product = cat.products.create(title: "product #{i}", description: text, image: images.sample)
       print 'p'
     else
       print 'f'
