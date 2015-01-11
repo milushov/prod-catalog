@@ -3,7 +3,7 @@ p#notice = notice
 .row.product-card
   .col-xs-4.col-sm-4
     .thumbnail
-      = image_tag('http://placehold.it/350x250')
+      = @product.image || image_tag('http://placehold.it/350x250')
 
   .col-xs-6.col-sm-6
     .row: h1 = @product.title

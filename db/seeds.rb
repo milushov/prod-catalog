@@ -1,13 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-#
-#
-
 speech = <<eos
   I am honored to be with you today at your commencement from one of the finest universities in the world. I never graduated from college. Truth be told, this is the closest I've ever gotten to a college graduation. Today I want to tell you three stories from my life. That's it. No big deal. Just three stories.
   The first story is about connecting the dots.
@@ -15,13 +5,16 @@ speech = <<eos
   It started before I was born. My biological mother was a young, unwed college graduate student, and she decided to put me up for adoption. She felt very strongly that I should be adopted by college graduates, so everything was all set for me to be adopted at birth by a lawyer and his wife. Except that when I popped out they decided at the last minute that they really wanted a girl. So my parents, who were on a waiting list, got a call in the middle of the night asking: "We have an unexpected baby boy; do you want him?" They said: "Of course." My biological mother later found out that my mother had never graduated from college and that my father had never graduated from high school. She refused to sign the final adoption papers. She only relented a few months later when my parents promised that I would someday go to college.
 eos
 
-admin = User.create(is_admin: true, email: 'roma@milushov.ru', password: '12345678')
 
 Category.destroy_all
 Product.destroy_all
 Review.destroy_all
-
 User.destroy_all
+
+
+admin = User.create(is_admin: true, email: 'roma@milushov.ru', password: '12345678')
+user = User.create(is_admin: false, email: 'test@test.ru', password: '12345678')
+
 
 %w[cat1 cat2 cat3].each do |cat_name|
   if cat = Category.create(name: cat_name)
@@ -42,7 +35,7 @@ User.destroy_all
 
     (1..rand(7..12)).each do
       text = speech.split(' ').select{ rand(2).even? }.join(' ')
-      if product.reviews.create(user: admin, msg: text)
+      if product.reviews.create(user: [admin, user].sample, msg: text)
         print 'r'
       else
         'f'
