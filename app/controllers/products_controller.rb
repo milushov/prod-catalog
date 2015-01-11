@@ -21,8 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    # TODO fix nil
-    @reviews = @product.reviews.includes(:user).select{|p| !p.user_id.nil?}
+    @reviews = @product.reviews.includes(:user)
     @review = @product.reviews.new
     respond_with(@product)
   end
@@ -37,18 +36,31 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
-    respond_with(@product)
+    if @product.save
+      flash[:notice] = 'You have successfully create product!'
+      redirect_to category_products_path(@category)
+    else
+      respond_with(@product)
+    end
   end
 
   def update
     @product.update(product_params)
-    respond_with(@product)
+    if @product.save
+      flash[:notice] = 'You have successfully update product!'
+      redirect_to category_products_path(@product.category)
+    else
+      respond_with(@product)
+    end
   end
 
   def destroy
-    @product.destroy
-    respond_with(@product)
+    if @product.destroy
+      flash[:notice] = 'You have successfully delete product!'
+      redirect_to category_products_path(@category)
+    else
+      respond_with(@product)
+    end
   end
 
   private

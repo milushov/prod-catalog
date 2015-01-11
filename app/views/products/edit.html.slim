@@ -2,7 +2,7 @@ h1 Editing product
 
 == render 'form'
 
-= link_to 'Show', @product
-'|
-= link_to 'Back', products_path
+= link_to 'Show', category_product_path(@category, @product)
+|  | 
+= link_to 'Back', category_products_path(@category)
 
