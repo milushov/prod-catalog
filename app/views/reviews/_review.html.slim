@@ -4,3 +4,12 @@
     b = review.user.email
     |  | 
     = review.created_at.to_formatted_s(:long)
+
+    - if user_signed_in? && current_user.admin?
+      |  | 
+      = link_to edit_product_review_path(review.product_id, review) do
+        | edit
+      |  | 
+      = link_to product_review_path(review.product_id, review), method: :delete, data: { confirm: 'Are you sure?' } do
+        | delete
+

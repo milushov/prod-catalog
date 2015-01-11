@@ -1,0 +1,9 @@
+- if user_signed_in?
+  h2 Leave your feedback fot this product
+  = render 'reviews/form'
+- else
+  .alert.alert-info.review-login
+    | Before leaving your feedback 
+    = link_to 'login', new_user_session_path
+    |  or 
+    = link_to 'sing up', new_user_registration_path

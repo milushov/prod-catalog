@@ -6,3 +6,7 @@ div.list-group
     = link_to category, class: [is_category_active?(category) && 'active', 'list-group-item' ] do
       = category.name
       span.badge = category.products.size
+
+- if user_signed_in? && current_user.admin?
+  = link_to categories_path do
+    | edit categories

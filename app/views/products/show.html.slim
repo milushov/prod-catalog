@@ -6,22 +6,14 @@ p#notice = notice
       = image_tag('http://placehold.it/350x250')
 
   .col-xs-6.col-sm-6
-    .row
-      h1 = @product.title
-    .row
-      = @product.description
+    .row: h1 = @product.title
+    .row = @product.description
+
+  = render 'products/actions', product: @product
 
 .row.product-comments
 
-  - if user_signed_in?
-    h2 Leave your feedback fot this product
-    = render 'reviews/form'
-  - else
-    .alert.alert-info.review-login
-      | Before leaving your feedback 
-      = link_to 'login', new_user_session_path
-      |  or 
-      = link_to 'sing up', new_user_registration_path
+  = render 'reviews/new_review'
 
   h2 Reviews
 

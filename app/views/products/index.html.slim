@@ -4,3 +4,4 @@ h1 Listing products
   .well.well-sm
     = link_to category_product_path(product.category_id, product) do
       = product.title
+    = render 'products/actions', product: product
