@@ -51,7 +51,6 @@ end
 
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
-gem 'puma'
 
 group :production do
   gem 'rails_12factor'
