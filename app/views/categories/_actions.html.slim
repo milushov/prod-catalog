@@ -1,0 +1,7 @@
+- if user_signed_in? && current_user.admin?
+  span.product-actions
+    = link_to edit_category_path(category) do
+      | edit
+    |  | 
+    = link_to category_path(category), method: :delete, data: { confirm: 'Are you sure?' } do
+      | delete

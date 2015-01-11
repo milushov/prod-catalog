@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_reviewable
 
@@ -58,5 +60,9 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:msg, :product_id)
+  end
+
+  def resolve_layout
+    'admin'
   end
 end

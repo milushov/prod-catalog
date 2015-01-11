@@ -1,7 +1,13 @@
-h1 Listing products
+- if @products.any?
+  h1 Listing products
+  - @products.each do |product|
 
-- @products.each do |product|
-  .well.well-sm
-    = link_to category_product_path(product.category_id, product) do
-      = product.title
-    = render 'products/actions', product: product
+    .well.well-sm
+      = link_to category_product_path(product.category_id, product) do
+        = product.title
+      = render 'products/actions', product: product
+- else
+  h1 Listing products empty
+
+- if user_signed_in? && current_user.admin? && @category
+  = link_to 'Create new product', [:new, @category, :product], class: 'btn btn-primary'

@@ -1,7 +1,12 @@
 class CategoriesController < ApplicationController
+
+  layout :resolve_layout
+
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
 
   respond_to :html
+
 
   def index
     @categories = Category.all
@@ -37,11 +42,21 @@ class CategoriesController < ApplicationController
   end
 
   private
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    def category_params
-      params.require(:category).permit(:name)
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit(:name)
+  end
+
+  def resolve_layout
+    case action_name
+    when 'show'
+      'application'
+    else
+      'admin'
     end
+  end
 end

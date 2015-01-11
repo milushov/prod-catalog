@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  layout :layout_by_resource
   before_action :store_return_to
 
   # Prevent CSRF attacks by raising an exception.

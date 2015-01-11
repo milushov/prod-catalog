@@ -1,19 +1,9 @@
 h1 Listing categories
 
-table
-  thead
-    tr
-      th
-      th
-      th
+- @categories.each do |category|
+  .well.well-sm
+    = link_to edit_category_path(category) do
+      = category.name
+    = render 'categories/actions', category: category
 
-  tbody
-    - @categories.each do |category|
-      tr
-        td = link_to 'Show', category
-        td = link_to 'Edit', edit_category_path(category)
-        td = link_to 'Destroy', category, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Category', new_category_path
+= link_to 'New Category', new_category_path, class: 'btn btn-primary'
