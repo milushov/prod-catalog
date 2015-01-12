@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   before_action :store_return_to
 
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -30,5 +31,14 @@ class ApplicationController < ActionController::Base
 
   def store_return_to
     session[:return_to] = request.url unless request.url =~ /users\/sign_in/
+  end
+
+  def authenticate_user!
+    if user_signed_in? && !current_user.admin?
+      flash[:alert] = 'you have not rights for this page'
+      redirect_to root_path
+    end
+
+    super
   end
 end
